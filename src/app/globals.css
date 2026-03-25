@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors from Figma */
+  --color-primary: #0C0C0C;
+  --color-dark: #1C1C1C;
+  --color-accent: #B5FE28;
+  --color-accent-light: #E6FEB6;
+  --color-bg: #F2F2F2;
+  --color-bg-light: #F9F9F9;
+  --color-text-body: #30302F;
+  --color-text-muted: #666666;
+  --color-border: #EAEAEA;
+
+  /* Font families */
+  --font-heading: 'Hanken Grotesk', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0C0C0C;
+    background: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Hanken Grotesk', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn-shadow {
+    box-shadow: 0px 3px 5px -3px rgba(0, 0, 0, 0.18);
+  }
+
+  .card-shadow {
+    box-shadow:
+      0px 3px 5px -3px rgba(0, 0, 0, 0.18),
+      0px 3px 10px -2px rgba(0, 0, 0, 0.25);
+  }
+
+  .header-shadow {
+    box-shadow:
+      0px 3px 5px -3px rgba(0, 0, 0, 0.18),
+      0px 3px 10px -2px rgba(0, 0, 0, 0.25),
+      0px 0px 28px -18px rgba(0, 0, 0, 0.24),
+      0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .tag-glow {
+    box-shadow:
+      0px 13px 19px -12px rgba(181, 254, 40, 0.5),
+      0px 4px 9px -3px rgba(41, 40, 37, 1),
+      inset 0px -1px 7px -4px rgba(181, 254, 40, 0.86);
+  }
+}
+
+::selection {
+  background-color: #B5FE28;
+  color: #0C0C0C;
+}

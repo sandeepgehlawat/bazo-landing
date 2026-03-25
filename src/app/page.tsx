@@ -1,0 +1,639 @@
+"use client";
+
+// =============================================================================
+// SHARED COMPONENTS
+// =============================================================================
+
+function BazoLogo({ size = 48, dark = false }: { size?: number; dark?: boolean }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className="aspect-square">
+      {/* Background */}
+      <path d="M0 14.6787C0 9.65086 0 7.13694 0.947357 5.20315C1.85441 3.35161 3.35161 1.85441 5.20315 0.947357C7.13694 0 9.65086 0 14.6787 0H33.3213C38.3491 0 40.8631 0 42.7969 0.947357C44.6484 1.85441 46.1456 3.35161 47.0526 5.20315C48 7.13694 48 9.65086 48 14.6787V33.3213C48 38.3491 48 40.8631 47.0526 42.7969C46.1456 44.6484 44.6484 46.1456 42.7969 47.0526C40.8631 48 38.3491 48 33.3213 48H14.6787C9.65086 48 7.13694 48 5.20315 47.0526C3.35161 46.1456 1.85441 44.6484 0.947357 42.7969C0 40.8631 0 38.3491 0 33.3213V14.6787Z" fill="#B5FE28"/>
+      {/* Logo Mark - centered */}
+      <g transform="translate(10, 6.5)">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.474 17.9634C20.3736 17.9632 22.2336 16.0372 22.2336 13.2212C22.2335 10.4054 20.3736 8.4793 18.474 8.47913C16.5743 8.47913 14.7137 10.4053 14.7136 13.2212C14.7136 16.0373 16.5743 17.9634 18.474 17.9634Z" fill="#1C1C1C"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M22.2336 13.2212C22.2336 16.0372 20.3736 17.9632 18.474 17.9634C16.5743 17.9634 14.7136 16.0373 14.7136 13.2212C14.7137 10.4053 16.5743 8.47913 18.474 8.47913C20.3736 8.4793 22.2335 10.4054 22.2336 13.2212Z" fill="#B5FE28"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M25.602 17.9634H23.3521C24.2797 16.6496 24.8196 14.9743 24.8196 13.2212C24.8195 9.32269 22.1552 5.80506 18.474 5.80489C16.0268 5.80489 14.0302 7.36029 12.9657 9.54767C12.0077 8.49804 10.7099 7.83158 9.21014 7.83158C5.994 7.83174 3.70666 10.8955 3.70663 14.2346C3.70663 15.5838 4.08031 16.888 4.73755 17.9634H2.94739L3.36167 11.4862C3.56325 8.33338 5.72405 5.6818 8.69469 4.94232L16.9858 2.87856C21.3775 1.78537 25.602 5.22746 25.602 9.89863V17.9634Z" fill="white"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M28.188 9.89863C28.188 3.49749 22.3992 -1.21856 16.3811 0.279296L8.09 2.34305C4.01909 3.3564 1.05824 6.98934 0.781999 11.3099L0.0211633 23.208C-0.316398 28.4877 3.42232 33.1075 8.50746 33.694L17.5594 34.7379C23.2285 35.3916 28.188 30.8031 28.188 24.9043V9.89863ZM18.474 17.9634C20.3736 17.9632 22.2336 16.0372 22.2336 13.2212C22.2335 10.4054 20.3736 8.4793 18.474 8.47913C16.5743 8.47913 14.7137 10.4053 14.7136 13.2212C14.7136 16.0373 16.5743 17.9634 18.474 17.9634ZM25.602 20.6376H2.7761L2.60083 23.3843C2.3545 27.2371 5.08343 30.6083 8.79427 31.0363L17.8462 32.0801C21.9831 32.5571 25.602 29.2088 25.602 24.9043V20.6376ZM6.29268 14.2346C6.2927 11.9783 7.77561 10.506 9.21014 10.5058C10.6448 10.5058 12.1284 11.9781 12.1284 14.2346C12.1284 16.4911 10.6448 17.9634 9.21014 17.9634C7.7756 17.9632 6.29268 16.4909 6.29268 14.2346ZM23.3521 17.9634H25.602V9.89863C25.602 5.22746 21.3775 1.78537 16.9858 2.87856L8.69469 4.94232C5.72405 5.6818 3.56325 8.33338 3.36167 11.4862L2.94739 17.9634H4.73755C4.08031 16.888 3.70663 15.5838 3.70663 14.2346C3.70666 10.8955 5.994 7.83174 9.21014 7.83158C10.7099 7.83158 12.0077 8.49804 12.9657 9.54767C14.0302 7.36029 16.0268 5.80489 18.474 5.80489C22.1552 5.80506 24.8195 9.32269 24.8196 13.2212C24.8196 14.9743 24.2797 16.6496 23.3521 17.9634Z" fill="#1C1C1C"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M2.7761 20.6376H25.602V24.9043C25.602 29.2088 21.9831 32.5571 17.8462 32.0801L8.79427 31.0363C5.08343 30.6083 2.3545 27.2371 2.60083 23.3843L2.7761 20.6376Z" fill="#B5FE28"/>
+        <path d="M9.21014 10.5058C7.77561 10.506 6.2927 11.9783 6.29268 14.2346C6.29268 16.4909 7.7756 17.9632 9.21014 17.9634C10.6448 17.9634 12.1284 16.4911 12.1284 14.2346C12.1284 11.9781 10.6448 10.5058 9.21014 10.5058Z" fill="#B5FE28"/>
+      </g>
+    </svg>
+  );
+}
+
+// Get App button with QR code
+function GetAppButton() {
+  return (
+    <button className="h-12 px-4 flex items-center gap-2.5 bg-[#B5FE28] text-[#0C0C0C] font-heading font-semibold text-sm rounded-xl hover:bg-[#a8ed20] transition btn-shadow border border-[#0C0C0C]">
+      <div className="w-7 h-7 bg-white rounded-md p-0.5 flex items-center justify-center border border-gray-200">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <rect x="5" y="5" width="28" height="28" rx="2" fill="black"/>
+          <rect x="67" y="5" width="28" height="28" rx="2" fill="black"/>
+          <rect x="5" y="67" width="28" height="28" rx="2" fill="black"/>
+          <rect x="12" y="12" width="14" height="14" fill="white"/>
+          <rect x="74" y="12" width="14" height="14" fill="white"/>
+          <rect x="12" y="74" width="14" height="14" fill="white"/>
+          <rect x="40" y="40" width="20" height="20" fill="black"/>
+          <rect x="67" y="67" width="28" height="28" rx="2" fill="black"/>
+          <rect x="74" y="74" width="14" height="14" fill="white"/>
+        </svg>
+      </div>
+      Get app
+    </button>
+  );
+}
+
+// =============================================================================
+// NAVBAR
+// =============================================================================
+function Navbar() {
+  return (
+    <nav className="w-full max-w-[796px] mx-auto bg-[#1C1C1C] rounded-[12px] md:rounded-[16px] p-2 md:p-[10px] flex items-center justify-between" style={{boxShadow: '0 0 9px 0 rgba(0, 0, 0, 0.10), 0 0 28px -18px rgba(0, 0, 0, 0.24), 0 3px 10px -2px rgba(0, 0, 0, 0.25), 0 3px 5px -3px rgba(0, 0, 0, 0.18)'}}>
+      <div className="flex items-center gap-1 md:gap-2">
+        <BazoLogo size={36} />
+        <svg width="81" height="24" viewBox="0 0 81 24" fill="none" className="hidden sm:block w-[60px] md:w-[81px] h-auto">
+          <path d="M0 23.9883V0H7.91579C10.2332 0 12.0458 0.527719 13.3536 1.58316C14.6844 2.6386 15.3498 4.11851 15.3498 6.02288C15.3498 7.1701 15.0974 8.19112 14.5926 9.08595C14.0878 9.95784 13.3765 10.6347 12.4588 11.1165C13.8354 11.5295 14.8679 12.2523 15.5563 13.2848C16.2446 14.2943 16.5887 15.5792 16.5887 17.1394C16.5887 19.2962 15.9119 20.9826 14.5582 22.1986C13.2045 23.3917 11.3001 23.9883 8.84504 23.9883H0ZM3.51048 20.7531H8.60412C11.6098 20.7531 13.1127 19.4912 13.1127 16.9673C13.1127 15.7513 12.757 14.8106 12.0458 14.1452C11.3574 13.4798 10.3823 13.1471 9.12037 13.1471H3.51048V20.7531ZM3.51048 10.0152H8.32879C9.38423 10.0152 10.2332 9.70545 10.8756 9.08595C11.541 8.46645 11.8737 7.61751 11.8737 6.53913C11.8737 5.48369 11.5295 4.66917 10.8412 4.09556C10.1529 3.52195 9.17773 3.23515 7.91579 3.23515H3.51048V10.0152Z" fill="white"/>
+          <path d="M33.6433 20.1936L33.9386 23.9883H38.1612V9.00832C38.1612 6.16194 37.3011 3.95678 35.5807 2.39284C33.8917 0.797612 31.4988 0 28.4022 0C26.4317 0 24.6018 0.344068 22.9128 1.0322C21.255 1.68906 19.738 2.7369 18.3617 4.17573L21.2237 7.13159C22.2559 6.00555 23.335 5.1923 24.4611 4.69184C25.6184 4.19137 26.8226 3.94114 28.0738 3.94114C29.8567 3.94114 31.2173 4.37905 32.1557 5.25486C33.0941 6.13066 33.5633 7.38182 33.5633 9.00832V9.75902H26.6193C25.462 9.75902 24.3673 9.86849 23.335 10.0874C22.3341 10.2751 21.4427 10.6192 20.6607 11.1196C19.8162 11.6201 19.128 12.3395 18.5963 13.2779C18.0646 14.185 17.7987 15.2797 17.7987 16.5622C17.7987 18.0323 18.1584 19.3304 18.8778 20.4564C19.5972 21.5512 20.6138 22.4113 21.9275 23.0369C23.2412 23.6625 24.7582 23.9753 26.4786 23.9753C27.98 23.9753 29.325 23.6625 30.5136 23.0369C31.7334 22.4113 32.75 21.5042 33.5633 20.3156C33.5902 20.2752 33.6169 20.2345 33.6433 20.1936ZM33.5633 13.231V13.8878C33.5633 15.1077 33.2661 16.2025 32.6718 17.1721C32.0775 18.1105 31.2799 18.8612 30.279 19.4242C29.3093 19.9559 28.2302 20.2218 27.0416 20.2218C25.634 20.2218 24.508 19.8934 23.6635 19.2365C22.8189 18.5797 22.3967 17.7039 22.3967 16.6091C22.3967 16.0461 22.5062 15.5613 22.7251 15.1546C22.9441 14.7167 23.2412 14.357 23.6166 14.0755C24.0857 13.7314 24.6488 13.5125 25.3056 13.4186C25.9938 13.2935 26.6506 13.231 27.2762 13.231H33.5633Z" fill="white"/>
+          <path d="M52.7798 3.89848L39.6603 20.6854V23.9941H58.1508V20.1015H45.4297L58.1978 3.50922V0.00585652H40.2704V3.89848H52.7798Z" fill="white"/>
+          <path d="M69.605 24C67.4143 24 65.4583 23.4836 63.737 22.4509C62.0158 21.4181 60.6544 19.9941 59.6529 18.179C58.6827 16.3638 58.1977 14.2983 58.1977 11.9824C58.1977 9.66649 58.6827 7.61661 59.6529 5.83275C60.6231 4.01759 61.9688 2.59362 63.6901 1.56086C65.4427 0.528095 67.4143 0.011713 69.605 0.011713C71.827 0.011713 73.783 0.528095 75.473 1.56086C77.163 2.59362 78.493 4.01759 79.4632 5.83275C80.4647 7.61661 80.9654 9.66649 80.9654 11.9824C80.9654 14.2983 80.4647 16.3638 79.4632 18.179C78.493 19.9628 77.1473 21.3868 75.426 22.4509C73.7361 23.4836 71.7957 24 69.605 24ZM69.605 19.9159C70.982 19.9159 72.1713 19.5873 73.1727 18.9301C74.2055 18.2729 74.9879 17.3496 75.5199 16.1604C76.0833 14.9711 76.3649 13.5785 76.3649 11.9824C76.3649 10.355 76.0833 8.94668 75.5199 7.75744C74.9879 6.5682 74.2055 5.66062 73.1727 5.0347C72.1713 4.37749 70.982 4.04888 69.605 4.04888C68.1967 4.04888 66.9762 4.37749 65.9434 5.0347C64.9419 5.69192 64.1595 6.61514 63.5962 7.80439C63.0642 8.96233 62.7982 10.355 62.7982 11.9824C62.7982 13.5785 63.0642 14.9711 63.5962 16.1604C64.1595 17.3496 64.9419 18.2729 65.9434 18.9301C66.9762 19.5873 68.1967 19.9159 69.605 19.9159Z" fill="white"/>
+        </svg>
+      </div>
+      <div className="flex items-center gap-1 md:gap-2">
+        <button className="hidden sm:block h-8 md:h-10 px-3 md:px-5 bg-white rounded-[8px] md:rounded-[10px] text-[#0C0C0C] font-heading font-semibold text-xs md:text-sm hover:bg-gray-50 transition btn-shadow">
+          Become Seller
+        </button>
+        <button className="h-8 md:h-10 px-3 md:px-5 bg-[#B5FE28] rounded-[8px] md:rounded-[10px] text-[#0C0C0C] font-heading font-semibold text-xs md:text-sm hover:bg-[#a8ed20] transition btn-shadow">
+          Get app
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+// =============================================================================
+// HERO SECTION
+// =============================================================================
+function HeroSection() {
+  return (
+    <section className="px-4 pt-4 md:px-6 md:pt-6">
+      <div className="w-full max-w-[1232px] min-h-[600px] lg:h-[827px] mx-auto bg-[#F2F2F2] rounded-[24px] md:rounded-[36px] pt-[10px] pb-8 lg:pb-0 relative overflow-hidden">
+        {/* Navbar inside hero with 10px padding */}
+        <div className="px-[10px]">
+          <Navbar />
+        </div>
+        {/* Decorations - hidden on small screens */}
+        <img src="/images/pot.svg" alt="" className="hidden md:block absolute top-[60px] lg:top-[100px] left-[10px] lg:left-[20px] w-[50px] lg:w-[81px] h-auto" />
+        <img src="/images/cup.svg" alt="" className="hidden md:block absolute top-[200px] lg:top-[340px] right-[20px] lg:right-[36px] w-[40px] lg:w-auto" />
+
+        <div className="flex flex-col justify-center items-center w-full max-w-[880px] px-4 md:px-0 mx-auto relative z-10 mt-16 md:mt-20 lg:mt-[118px]">
+          {/* Tag with gradient and glow */}
+          <span
+            className="flex px-[9px] py-[6px] justify-center items-center gap-[3px] rounded-[30px] border border-[#1C1C1C] text-white text-[16px] font-body font-normal leading-[16px] tracking-[-0.16px] text-center"
+            style={{
+              background: 'linear-gradient(180deg, #0C0C0C 11.41%, #4B4B4A 100%)',
+              boxShadow: '0 -1px 7px -4px rgba(181, 254, 40, 0.86) inset, 0 4px 9px -3px #292825, 0 13px 19px -12px rgba(181, 254, 40, 0.50)'
+            }}
+          >
+            Buy Live. From Creators.
+          </span>
+
+          {/* Headings */}
+          <h1
+            className="self-stretch mt-4 text-[40px] sm:text-[56px] lg:text-[72px] font-heading font-black leading-[1.08] tracking-[-1.44px] text-center"
+            style={{
+              background: 'linear-gradient(192deg, #0C0C0C 52.51%, #6F6F6F 106.61%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}
+          >
+            Bazo.
+          </h1>
+          <h2
+            className="self-stretch text-[28px] sm:text-[40px] lg:text-[72px] font-heading font-black leading-[1.08] tracking-[-1.44px] text-center"
+            style={{
+              background: 'linear-gradient(192deg, #0C0C0C 52.51%, #6F6F6F 106.61%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}
+          >
+            The New Way India Shops.
+          </h2>
+
+          {/* Subtitle */}
+          <p className="mt-4 text-[16px] sm:text-[18px] lg:text-[20px] font-heading font-bold text-[#30302F] leading-[1.2] tracking-[-0.2px] text-center px-2">
+            Buy directly from the creators you trust. Live. Real. Limited editions.
+          </p>
+
+          {/* App Store Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5 mt-6 sm:mt-8">
+            <a href="#" className="flex p-3 justify-center items-center gap-1 rounded-[16px] border-2 border-[#0C0C0C] bg-[#F2F2F2] hover:bg-gray-200 transition" style={{boxShadow: '0 3px 5px -3px rgba(0, 0, 0, 0.18)'}}>
+              <div className="flex h-[42px] p-[9px] flex-col justify-center items-center gap-[10px] rounded-[10px]">
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="#1C1C1C">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.807 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                </svg>
+              </div>
+              <div className="text-left">
+                <div className="text-[10px] text-[#666] font-body leading-tight">Get it on the</div>
+                <div className="self-stretch text-[18px] sm:text-[22px] font-heading font-black text-[#0C0C0C] leading-[26px] tracking-[-0.22px]">Google Play</div>
+              </div>
+            </a>
+            <a href="#" className="flex p-3 justify-center items-center gap-1 rounded-[16px] border-2 border-[#0C0C0C] bg-[#F2F2F2] hover:bg-gray-200 transition" style={{boxShadow: '0 3px 5px -3px rgba(0, 0, 0, 0.18)'}}>
+              <div className="flex h-[42px] py-[11px] px-[9px] flex-col justify-center items-center gap-[10px] rounded-[10px] bg-[#0D96F6]">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="white">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+              </div>
+              <div className="text-left">
+                <div className="text-[10px] text-[#666] font-body leading-tight">Download on the</div>
+                <div className="self-stretch text-[18px] sm:text-[22px] font-heading font-black text-[#0C0C0C] leading-[26px] tracking-[-0.22px]">App Store</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        {/* Hero Illustration - responsive positioning */}
+        <div className="relative lg:absolute lg:top-[487px] left-0 right-0 flex justify-center mt-8 lg:mt-0">
+          <img src="/images/hero-image-new.svg" alt="Girl shopping on phone" className="w-[280px] sm:w-[400px] lg:w-[596px] h-auto object-contain" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// SHIFT SECTION
+// =============================================================================
+function ShiftSection() {
+  return (
+    <section className="px-4 md:px-6 mt-3">
+      <div className="w-full max-w-[1232px] min-h-[400px] lg:h-[716px] mx-auto rounded-[24px] md:rounded-[36px] py-10 md:py-14 px-6 md:px-8 relative overflow-hidden">
+        {/* Decorations */}
+        <img src="/images/pot.svg" alt="" className="absolute top-8 left-6 w-16" />
+        <img src="/images/cup.svg" alt="" className="absolute top-10 right-6 w-12" />
+
+        <div className="max-w-[400px] mx-auto relative z-10">
+          {/* Tag centered */}
+          <div className="text-center mb-6">
+            <span className="inline-block px-5 py-2 bg-[#1C1C1C] text-white text-sm font-body rounded-full">
+              Shift in 2026
+            </span>
+          </div>
+
+          {/* Content - left aligned */}
+          <h2 className="text-[26px] md:text-[32px] font-heading font-black text-[#0C0C0C] leading-[1.15] tracking-tight">
+            Still Shopping From<br />Random Listings?
+          </h2>
+          <p className="mt-4 text-[15px] font-body text-[#888888] italic leading-[1.7]">
+            You follow creators for a reason.
+          </p>
+          <p className="text-[15px] font-body text-[#888888] italic leading-[1.7]">
+            You trust them.
+          </p>
+          <p className="text-[15px] font-body text-[#888888] italic leading-[1.7]">
+            So why not buy from them live?
+          </p>
+          <p className="mt-4 text-[15px] font-body text-[#888888] italic leading-[1.7]">
+            See it. Question it. Grab it.<br />Before it sells out.
+          </p>
+          <p className="mt-4 text-[15px] font-heading font-bold text-[#0C0C0C]">
+            Bazo makes scrolling shoppable.
+          </p>
+        </div>
+
+        {/* Get App Button */}
+        <div className="absolute bottom-5 right-5">
+          <GetAppButton />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// PROBLEM SECTION
+// =============================================================================
+function ProblemSection() {
+  return (
+    <section className="px-4 md:px-6 mt-3">
+      <div className="w-full max-w-[1232px] mx-auto bg-[#F2F2F2] rounded-[24px] md:rounded-[36px] py-10 md:py-14 px-6 md:px-8 relative overflow-hidden">
+        {/* Decorations */}
+        <img src="/images/cactus.svg" alt="" className="absolute top-10 left-8 w-14" />
+        <img src="/images/hot-cup.svg" alt="" className="absolute top-12 right-8 w-12" />
+
+        <div className="max-w-[800px] mx-auto relative z-10">
+          {/* Tag centered */}
+          <div className="text-center mb-8">
+            <span className="inline-block px-6 py-2.5 bg-white text-[#0C0C0C] text-sm font-heading font-medium rounded-full shadow-sm border border-gray-100">
+              Problem
+            </span>
+          </div>
+
+          {/* Two columns */}
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+            {/* Left - Heading */}
+            <div className="lg:w-1/2">
+              <h2 className="text-[32px] md:text-[40px] font-heading font-black text-[#0C0C0C] leading-[1.1] tracking-tight">
+                Shopping online should feel{" "}
+                <span className="text-[#8B8B6A]">transparent.</span>
+              </h2>
+            </div>
+
+            {/* Right - Problems */}
+            <div className="lg:w-1/2 text-right space-y-1.5">
+              <p className="text-[16px] font-body text-[#999999] italic">...scripted recommendations.</p>
+              <p className="text-[16px] font-body text-[#999999] italic">...paid opinions disguised as advice.</p>
+              <p className="mt-4 mb-4">
+                <span className="font-heading font-bold text-[#0C0C0C] text-[16px]">But online shopping gives you — </span>
+                <span className="font-body text-[#999999] text-[16px] italic">...manufactured trust.</span>
+              </p>
+              <p className="text-[16px] font-body text-[#999999] italic">...pressure instead of proof.</p>
+              <p className="text-[16px] font-body text-[#999999] italic">...algorithms instead of people.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Get App Button */}
+        <div className="absolute bottom-5 right-5">
+          <GetAppButton />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// SOLUTION SECTION - DARK BACKGROUND
+// =============================================================================
+// Solution Section - matching Figma exactly
+function SolutionSection() {
+  return (
+    <section className="px-4 md:px-6 mt-3">
+      <div className="w-full max-w-[1232px] mx-auto bg-black rounded-[24px] md:rounded-[36px] py-10 px-6 md:px-10 relative overflow-hidden">
+        <div className="max-w-[900px] mx-auto">
+          {/* Tag */}
+          <div className="text-center mb-4">
+            <span className="inline-block px-4 py-1.5 bg-[#B5FE28] text-black text-xs font-heading font-semibold rounded-full">
+              Solution
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-center text-[28px] md:text-[40px] font-heading font-black text-white leading-tight tracking-tight italic">
+            Bazo Brings Back Trust
+          </h2>
+          <p className="text-center mt-2 text-[14px] md:text-[15px] font-body text-[#888]">
+            Real products. Real creators. In real time.
+          </p>
+
+          {/* Two columns */}
+          <div className="mt-8 flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* Left - Features */}
+            <div className="lg:w-[45%] space-y-1">
+              {/* Expanded item */}
+              <div className="bg-[#D6F4F8] rounded-2xl p-4">
+                <div className="flex items-start gap-3">
+                  <img src="/images/solution-icon-1.svg" alt="" className="w-6 h-6 mt-0.5" />
+                  <div>
+                    <h3 className="font-heading font-bold text-[15px] text-black">Verified Creators Only</h3>
+                    <p className="mt-1.5 text-[13px] font-body text-[#444] leading-relaxed">
+                      Every seller is screened before they go live. No anonymous listings. No random storefronts. Just real people with accountability.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Other items - no borders, just stacked */}
+              <div className="py-2.5 px-4 flex items-center gap-3">
+                <img src="/images/solution-icon-2.svg" alt="" className="w-5 h-5" />
+                <span className="font-heading font-normal text-[14px] text-[#888]">Live Product Transparency</span>
+              </div>
+              <div className="py-2.5 px-4 flex items-center gap-3">
+                <img src="/images/solution-icon-3.svg" alt="" className="w-5 h-5" />
+                <span className="font-heading font-normal text-[14px] text-[#888]">Ask Before You Decide</span>
+              </div>
+              <div className="py-2.5 px-4 flex items-center gap-3">
+                <img src="/images/solution-icon-4.svg" alt="" className="w-5 h-5" />
+                <span className="font-heading font-normal text-[14px] text-[#888]">Watch Before You Trust</span>
+              </div>
+              <div className="py-2.5 px-4 flex items-center gap-3">
+                <img src="/images/solution-icon-5.svg" alt="" className="w-5 h-5" />
+                <span className="font-heading font-normal text-[14px] text-[#888]">Checkout Without Leaving</span>
+              </div>
+              <div className="py-2.5 px-4 flex items-center gap-3">
+                <img src="/images/solution-icon-6.svg" alt="" className="w-5 h-5" />
+                <span className="font-heading font-normal text-[14px] text-[#888]">Creators Put Their Reputation On The Line</span>
+              </div>
+            </div>
+
+            {/* Right - Illustration */}
+            <div className="lg:w-[55%] flex items-center justify-center">
+              <img src="/images/solution-illustration.png" alt="" className="w-full max-w-[320px] h-auto rounded-2xl" />
+            </div>
+          </div>
+        </div>
+
+        {/* Get App Button */}
+        <div className="absolute bottom-4 right-4">
+          <GetAppButton />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// BENEFITS SECTION - DARK BACKGROUND
+// =============================================================================
+function BenefitsSection() {
+  // Card images in display order (from Figma export)
+  const benefitCards = [
+    "/images/benefit-card-5.png", // Live = Real
+    "/images/benefit-card-3.png", // Buy From People You Trust
+    "/images/benefit-card-4.png", // Shop While You Scroll
+    "/images/benefit-card-6.png", // Interactive Buying
+    "/images/benefit-card-2.png", // 100s of Live Stores at Once
+    "/images/benefit-card-1.png", // Limited Drops & Real-Time Hype
+  ];
+
+  return (
+    <section className="px-4 md:px-6 mt-3">
+      <div className="w-full max-w-[1232px] mx-auto bg-black rounded-[24px] md:rounded-[36px] py-10 md:py-12 px-6 md:px-8 relative overflow-hidden">
+        {/* Decorations */}
+        <img src="/images/pot.svg" alt="" className="hidden md:block absolute top-8 left-6 w-14" />
+        <img src="/images/cup.svg" alt="" className="absolute top-10 right-6 w-10" />
+
+        <div className="max-w-[850px] mx-auto relative z-10">
+          {/* Tag centered */}
+          <div className="text-center mb-3">
+            <span className="inline-block px-5 py-2 bg-[#B5FE28] text-[#0C0C0C] text-sm font-heading font-semibold rounded-full">
+              Benefits
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-center text-[32px] md:text-[44px] font-heading leading-[1.1] tracking-tight">
+            <span className="text-[#888888] italic font-normal">A Better Way To</span><br />
+            <span className="text-white font-black">Discover. Decide. Buy.</span>
+          </h2>
+
+          {/* Benefits Grid */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {benefitCards.map((img, i) => (
+              <div key={i} className="rounded-xl overflow-hidden">
+                <img src={img} alt="" className="w-full h-auto" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Get App Button */}
+        <div className="absolute bottom-5 right-5">
+          <GetAppButton />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// HOW IT WORKS SECTION
+// =============================================================================
+function HowItWorksSection() {
+  const stepCards = [
+    "/images/step-card-1.png",
+    "/images/step-card-2.png",
+    "/images/step-card-3.png",
+    "/images/step-card-4.png",
+    "/images/step-card-5.png",
+  ];
+
+  return (
+    <section className="px-4 md:px-6 mt-3">
+      <div className="w-full max-w-[1232px] mx-auto bg-[#F2F2F2] rounded-[24px] md:rounded-[36px] py-10 md:py-12 px-6 md:px-8 relative overflow-hidden">
+        {/* Decorations */}
+        <img src="/images/pot.svg" alt="" className="hidden md:block absolute top-8 left-6 w-14" />
+        <img src="/images/cup.svg" alt="" className="hidden md:block absolute top-10 right-6 w-10" />
+
+        <div className="max-w-[560px] mx-auto relative z-10">
+          {/* Tag centered */}
+          <div className="text-center mb-3">
+            <span className="inline-block px-5 py-2 bg-[#1C1C1C] text-white text-sm font-body rounded-full">
+              How Bazo Works
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-center text-[36px] md:text-[48px] font-heading font-black text-[#0C0C0C] leading-[1.05] tracking-tight mb-10">
+            Watch. Tap. Done.
+          </h2>
+
+          {/* Steps */}
+          <div className="space-y-3">
+            {stepCards.map((img, i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm">
+                <img src={img} alt="" className="w-full h-auto" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Get App Button */}
+        <div className="absolute bottom-5 right-5">
+          <GetAppButton />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// FAQ SECTION - GREEN CHECKMARKS
+// =============================================================================
+function FAQSection() {
+  const faqs = [
+    "Are sellers verified?",
+    "Is Bazo just another shopping app?",
+    "Can I return products?",
+    "Do I need to follow creators to shop?",
+    "Is buying during a live stream safe?",
+  ];
+
+  return (
+    <section className="px-4 md:px-6 mt-3">
+      <div className="w-full max-w-[1232px] mx-auto bg-[#F2F2F2] rounded-[24px] md:rounded-[36px] py-10 md:py-12 px-6 md:px-8 relative overflow-hidden">
+        {/* Decorations */}
+        <img src="/images/pot.svg" alt="" className="hidden md:block absolute top-8 left-6 w-14" />
+        <img src="/images/cup.svg" alt="" className="hidden md:block absolute top-10 right-6 w-10" />
+
+        <div className="max-w-[480px] mx-auto relative z-10">
+          {/* Tag centered */}
+          <div className="text-center mb-3">
+            <span className="inline-block px-5 py-2 bg-[#1C1C1C] text-white text-sm font-body rounded-full">
+              FAQs
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-center text-[32px] md:text-[40px] font-heading text-[#0C0C0C] leading-[1.15] tracking-tight">
+            <span className="font-black">Things You Might Want</span><br />
+            <span className="italic font-normal">to Know</span>
+          </h2>
+          <p className="text-center mt-3 text-[16px] font-body text-[#666666]">
+            Short, simple answers about Bazo
+          </p>
+
+          {/* FAQ Items with green checkmarks */}
+          <div className="mt-8 space-y-0">
+            {faqs.map((q, i) => (
+              <div key={i} className="flex items-center justify-between py-4 border-b border-[#DCDCDC] last:border-b-0">
+                <span className="font-body text-[#0C0C0C] text-[16px]">{q}</span>
+                <div className="w-7 h-7 rounded-full bg-[#D4F5D0] border border-[#8FD17E] flex items-center justify-center flex-shrink-0 ml-4">
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="#3D8C2F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Get App Button */}
+        <div className="absolute bottom-5 right-5">
+          <GetAppButton />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// CTA & FOOTER
+// =============================================================================
+function CTAFooter() {
+  return (
+    <section className="px-4 md:px-6 mt-3 pb-4">
+      <div className="w-full max-w-[1232px] mx-auto bg-[#F2F2F2] rounded-[24px] md:rounded-[36px] pt-10 md:pt-12 pb-6 md:pb-8 px-6 md:px-8 relative overflow-hidden">
+        <div className="max-w-[850px] mx-auto relative z-10">
+          {/* CTA Section */}
+          <div className="flex flex-col lg:flex-row items-center gap-8 mb-12">
+            {/* Left */}
+            <div className="lg:w-1/2">
+              <span className="inline-block px-5 py-2.5 bg-[#B5FE28] text-[#0C0C0C] text-sm font-body rounded-full mb-5 border border-[#0C0C0C]">
+                Scroll smarter. Shop live.
+              </span>
+              <h2 className="text-[40px] md:text-[52px] font-heading font-black text-[#0C0C0C] leading-[1.0] tracking-tight">
+                Stop Guessing.<br />Start Seeing.
+              </h2>
+              <p className="mt-4 text-[16px] font-body text-[#666666]">
+                Join India's live shopping movement.
+              </p>
+
+              {/* Dark App Store Buttons */}
+              <div className="mt-5 flex gap-3">
+                <a href="#" className="h-12 px-4 flex items-center gap-2.5 bg-[#0C0C0C] rounded-xl hover:bg-black transition">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="white">
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.807 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                  </svg>
+                  <div className="text-left">
+                    <div className="text-[9px] text-gray-400 font-body leading-tight">Get it on the</div>
+                    <div className="text-[13px] font-heading font-bold text-white">Google Play</div>
+                  </div>
+                </a>
+                <a href="#" className="h-12 px-4 flex items-center gap-2.5 bg-[#0C0C0C] rounded-xl hover:bg-black transition">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="white">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
+                  <div className="text-left">
+                    <div className="text-[9px] text-gray-400 font-body leading-tight">Download on the</div>
+                    <div className="text-[13px] font-heading font-bold text-white">App Store</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Right - Phone */}
+            <div className="lg:w-1/2 flex justify-center">
+              <img src="/images/cta-phone-figma.png" alt="Bazo App" className="w-full max-w-[300px] h-auto" />
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="border-t border-[#DCDCDC] pt-10">
+            {/* Logo */}
+            <div className="flex items-center gap-2.5 mb-8">
+              <BazoLogo size={32} />
+              <span className="font-heading font-black text-[#0C0C0C] text-lg tracking-tight">BAZO</span>
+            </div>
+
+            {/* Footer Links */}
+            <div className="grid grid-cols-3 gap-8 mb-12">
+              <div>
+                <h4 className="font-heading font-semibold text-[#0C0C0C] text-xs uppercase tracking-wider mb-4">Support</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Terms of use <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Privacy policy <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Seller Agreement <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Refund Policy <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Cookies <span className="text-[10px]">↗</span></a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-heading font-semibold text-[#0C0C0C] text-xs uppercase tracking-wider mb-4">Quick Links</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Home <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">For creator <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">How it works <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">FAQS <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1">Start selling <span className="text-[10px]">↗</span></a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-heading font-semibold text-[#0C0C0C] text-xs uppercase tracking-wider mb-4">Socials</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1"><span className="font-semibold">in</span> Linkedin <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1"><span>◎</span> Instagram <span className="text-[10px]">↗</span></a></li>
+                  <li><a href="#" className="text-[14px] font-body text-[#0C0C0C] hover:text-[#666] inline-flex items-center gap-1"><span>𝕏</span> x.com <span className="text-[10px]">↗</span></a></li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Big BAZO */}
+            <div className="text-center py-6">
+              <h2 className="text-[80px] md:text-[120px] lg:text-[160px] font-heading font-black text-[#0C0C0C] leading-none tracking-[-0.04em]">
+                Bazo
+              </h2>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-center pb-2">
+              <p className="text-[13px] font-body text-[#666666]">
+                © 2026 &nbsp;&nbsp;&nbsp;&nbsp; All right reserved by BAZO
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// MAIN PAGE
+// =============================================================================
+export default function Home() {
+  return (
+    <main className="bg-white">
+      <HeroSection />
+      <ShiftSection />
+      <ProblemSection />
+      <SolutionSection />
+      <BenefitsSection />
+      <HowItWorksSection />
+      <FAQSection />
+      <CTAFooter />
+    </main>
+  );
+}
