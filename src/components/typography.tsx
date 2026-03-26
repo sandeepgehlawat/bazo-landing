@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { forwardRef, ReactNode } from "react";
 
 type TypographyProps = {
   children: ReactNode;
@@ -41,13 +41,27 @@ export function H4({ children, className = "", style }: TypographyProps) {
   );
 }
 
-export function H5({ children, className = "", style }: TypographyProps) {
-  return (
-    <h5 className={`font-heading font-black text-[24px] leading-7 md:text-[32px] md:leading-9.5 ${className}`} style={style}>
-      {children}
-    </h5>
-  );
-}
+export const H5 = forwardRef<HTMLHeadingElement, TypographyProps>(
+  ({ children, className = "", style }, ref) => {
+    return (
+      <h5
+        ref={ref}
+        className={`font-heading font-black text-[24px] leading-7 md:text-[32px] md:leading-9.5 ${className}`}
+        style={style}
+      >
+        {children}
+      </h5>
+    );
+  }
+);
+
+// export function H5({ children, className = "", style }: TypographyProps) {
+//   return (
+//     <h5 ref={ref} className={`font-heading font-black text-[24px] leading-7 md:text-[32px] md:leading-9.5 ${className}`} style={style}>
+//       {children}
+//     </h5>
+//   );
+// }
 
 export function H6({ children, className = "", style }: TypographyProps) {
   return (
@@ -63,21 +77,21 @@ export function H6({ children, className = "", style }: TypographyProps) {
 
 export function Sh0({ children, className = "", style }: TypographyProps) {
   return (
-    <h6 className={`font-heading font-black text-[20px] leading-5.5 md:text-[22px] md:leading-6.5 ${className}`} style={style}>
+    <h6 className={`font-heading font-black text-[20px] leading-5.5 md:text-[22px] md:leading-6.5 text-text-body ${className}`} style={style}>
       {children}
     </h6>
   );
 }
 export function Sh1({ children, className = "", style }: TypographyProps) {
   return (
-    <h6 className={`font-heading font-bold text-[18px] leading-5 md:text-[20px] md:leading-6 ${className}`} style={style}>
+    <h6 className={`font-heading font-bold text-[18px] leading-5 md:text-[20px] md:leading-6 text-text-body ${className}`} style={style}>
       {children}
     </h6>
   );
 }
 export function Sh2({ children, className = "", style }: TypographyProps) {
   return (
-    <h6 className={`font-heading font-bold text-[16px] leading-4.5 md:text-[18px] md:leading-5.5 ${className}`} style={style}>
+    <h6 className={`font-heading font-bold text-[16px] leading-4.5 md:text-[18px] md:leading-5.5 text-text-body ${className}`} style={style}>
       {children}
     </h6>
   );
@@ -88,7 +102,7 @@ export function Sh2({ children, className = "", style }: TypographyProps) {
 // -----------------------------------------------------------
 export function P({ children, className = "", style }: TypographyProps) {
   return (
-    <p className={`font-body text-base leading-5.5 ${className}`} style={style}>
+    <p className={`font-body text-base font-medium leading-5.5 text-text-body ${className}`} style={style}>
       {children}
     </p>
   );

@@ -1,25 +1,45 @@
+"use client";
+
+import Link from "next/link";
 import { ButtonText } from "../typography";
 import Button from "../ui/Button";
 import BazoLogo from "./BazoLogo";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 export default function Navbar() {
+    const [hidden, setHidden] = useState(false);
+    const { scrollY } = useScroll();
+    const lastScrollY = useRef(0);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const diff = latest - lastScrollY.current;
+        // Only hide after scrolling down past 80px, show immediately on scroll up
+        if (diff > 0 && latest > 80) {
+            setHidden(true);
+        } else if (diff < 0) {
+            setHidden(false);
+        }
+        lastScrollY.current = latest;
+    });
+
     return (
-        <nav className="w-full max-w-199 mx-auto bg-dark rounded-xl md:rounded-2xl p-2.5 flex items-center justify-between" style={{ boxShadow: '0 0 9px 0 rgba(0, 0, 0, 0.10), 0 0 28px -18px rgba(0, 0, 0, 0.24), 0 3px 10px -2px rgba(0, 0, 0, 0.25), 0 3px 5px -3px rgba(0, 0, 0, 0.18)' }}>
-            <div className="flex items-center gap-1 md:gap-2">
-                <BazoLogo size={48} />
-                <svg width="81" height="24" viewBox="0 0 81 24" fill="none" className="hidden sm:block w-15 md:w-20.25 h-auto">
-                    <path d="M0 23.9883V0H7.91579C10.2332 0 12.0458 0.527719 13.3536 1.58316C14.6844 2.6386 15.3498 4.11851 15.3498 6.02288C15.3498 7.1701 15.0974 8.19112 14.5926 9.08595C14.0878 9.95784 13.3765 10.6347 12.4588 11.1165C13.8354 11.5295 14.8679 12.2523 15.5563 13.2848C16.2446 14.2943 16.5887 15.5792 16.5887 17.1394C16.5887 19.2962 15.9119 20.9826 14.5582 22.1986C13.2045 23.3917 11.3001 23.9883 8.84504 23.9883H0ZM3.51048 20.7531H8.60412C11.6098 20.7531 13.1127 19.4912 13.1127 16.9673C13.1127 15.7513 12.757 14.8106 12.0458 14.1452C11.3574 13.4798 10.3823 13.1471 9.12037 13.1471H3.51048V20.7531ZM3.51048 10.0152H8.32879C9.38423 10.0152 10.2332 9.70545 10.8756 9.08595C11.541 8.46645 11.8737 7.61751 11.8737 6.53913C11.8737 5.48369 11.5295 4.66917 10.8412 4.09556C10.1529 3.52195 9.17773 3.23515 7.91579 3.23515H3.51048V10.0152Z" fill="white" />
-                    <path d="M33.6433 20.1936L33.9386 23.9883H38.1612V9.00832C38.1612 6.16194 37.3011 3.95678 35.5807 2.39284C33.8917 0.797612 31.4988 0 28.4022 0C26.4317 0 24.6018 0.344068 22.9128 1.0322C21.255 1.68906 19.738 2.7369 18.3617 4.17573L21.2237 7.13159C22.2559 6.00555 23.335 5.1923 24.4611 4.69184C25.6184 4.19137 26.8226 3.94114 28.0738 3.94114C29.8567 3.94114 31.2173 4.37905 32.1557 5.25486C33.0941 6.13066 33.5633 7.38182 33.5633 9.00832V9.75902H26.6193C25.462 9.75902 24.3673 9.86849 23.335 10.0874C22.3341 10.2751 21.4427 10.6192 20.6607 11.1196C19.8162 11.6201 19.128 12.3395 18.5963 13.2779C18.0646 14.185 17.7987 15.2797 17.7987 16.5622C17.7987 18.0323 18.1584 19.3304 18.8778 20.4564C19.5972 21.5512 20.6138 22.4113 21.9275 23.0369C23.2412 23.6625 24.7582 23.9753 26.4786 23.9753C27.98 23.9753 29.325 23.6625 30.5136 23.0369C31.7334 22.4113 32.75 21.5042 33.5633 20.3156C33.5902 20.2752 33.6169 20.2345 33.6433 20.1936ZM33.5633 13.231V13.8878C33.5633 15.1077 33.2661 16.2025 32.6718 17.1721C32.0775 18.1105 31.2799 18.8612 30.279 19.4242C29.3093 19.9559 28.2302 20.2218 27.0416 20.2218C25.634 20.2218 24.508 19.8934 23.6635 19.2365C22.8189 18.5797 22.3967 17.7039 22.3967 16.6091C22.3967 16.0461 22.5062 15.5613 22.7251 15.1546C22.9441 14.7167 23.2412 14.357 23.6166 14.0755C24.0857 13.7314 24.6488 13.5125 25.3056 13.4186C25.9938 13.2935 26.6506 13.231 27.2762 13.231H33.5633Z" fill="white" />
-                    <path d="M52.7798 3.89848L39.6603 20.6854V23.9941H58.1508V20.1015H45.4297L58.1978 3.50922V0.00585652H40.2704V3.89848H52.7798Z" fill="white" />
-                    <path d="M69.605 24C67.4143 24 65.4583 23.4836 63.737 22.4509C62.0158 21.4181 60.6544 19.9941 59.6529 18.179C58.6827 16.3638 58.1977 14.2983 58.1977 11.9824C58.1977 9.66649 58.6827 7.61661 59.6529 5.83275C60.6231 4.01759 61.9688 2.59362 63.6901 1.56086C65.4427 0.528095 67.4143 0.011713 69.605 0.011713C71.827 0.011713 73.783 0.528095 75.473 1.56086C77.163 2.59362 78.493 4.01759 79.4632 5.83275C80.4647 7.61661 80.9654 9.66649 80.9654 11.9824C80.9654 14.2983 80.4647 16.3638 79.4632 18.179C78.493 19.9628 77.1473 21.3868 75.426 22.4509C73.7361 23.4836 71.7957 24 69.605 24ZM69.605 19.9159C70.982 19.9159 72.1713 19.5873 73.1727 18.9301C74.2055 18.2729 74.9879 17.3496 75.5199 16.1604C76.0833 14.9711 76.3649 13.5785 76.3649 11.9824C76.3649 10.355 76.0833 8.94668 75.5199 7.75744C74.9879 6.5682 74.2055 5.66062 73.1727 5.0347C72.1713 4.37749 70.982 4.04888 69.605 4.04888C68.1967 4.04888 66.9762 4.37749 65.9434 5.0347C64.9419 5.69192 64.1595 6.61514 63.5962 7.80439C63.0642 8.96233 62.7982 10.355 62.7982 11.9824C62.7982 13.5785 63.0642 14.9711 63.5962 16.1604C64.1595 17.3496 64.9419 18.2729 65.9434 18.9301C66.9762 19.5873 68.1967 19.9159 69.605 19.9159Z" fill="white" />
-                </svg>
-            </div>
-            <div className="flex items-center gap-1 md:gap-4">
-                <Button variant="secondary" className="hidden sm:block"><ButtonText>Become Bazo Host</ButtonText></Button>
-                <div className="hidden md:flex">
-                <Button className="hidden md:flex"><ButtonText>Get app</ButtonText></Button>
+        <motion.div
+            className="fixed top-6 md:top-8 z-50 w-full flex items-center justify-center px-6"
+            animate={{ y: hidden ? "-150%" : "0%" }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+            <nav className="w-full max-w-199 mx-auto bg-dark rounded-xl md:rounded-2xl p-2.5 flex items-center justify-between" style={{ boxShadow: '0 0 9px 0 rgba(0, 0, 0, 0.10), 0 0 28px -18px rgba(0, 0, 0, 0.24), 0 3px 10px -2px rgba(0, 0, 0, 0.25), 0 3px 5px -3px rgba(0, 0, 0, 0.18)' }}>
+                <Link href="/">
+                    <BazoLogo size={48} />
+                </Link>
+                <div className="flex items-center gap-1 md:gap-4">
+                    <Link href="/host"><Button variant="secondary" className="hidden sm:block"><ButtonText>Become Host</ButtonText></Button></Link>
+                    <div className="hidden md:flex">
+                        <Button className="hidden md:flex"><ButtonText>Get app</ButtonText></Button>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </motion.div>
     );
 }

@@ -17,7 +17,7 @@ export function AccordionItem({ title, children, isOpen = false, onToggle }: Acc
         onClick={onToggle}
         className="w-full flex items-center justify-between py-4 cursor-pointer text-left"
       >
-        <Sh2>{title}</Sh2>
+        <Sh2 className="font-semibold">{title}</Sh2>
         <div className="w-7 h-7 rounded-full border border-primary bg-accent flex items-center justify-center shrink-0 ml-4">
           <svg
             className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
@@ -44,7 +44,7 @@ export function AccordionItem({ title, children, isOpen = false, onToggle }: Acc
 }
 
 type AccordionProps = {
-  items: { title: string; content: ReactNode }[];
+  items: { id:number, title: string; content: ReactNode }[];
   allowMultiple?: boolean;
   className?: string;
 };

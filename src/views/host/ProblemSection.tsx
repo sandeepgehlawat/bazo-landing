@@ -1,7 +1,7 @@
 "use client";
 
 import GetAppButton from "@/components/common/GetAppButton";
-import { H2, H3, H5 } from "@/components/typography";
+import { H3, H5 } from "@/components/typography";
 import Badge from "@/components/ui/Badge";
 import Image from "next/image";
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -9,15 +9,15 @@ import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const items = [
-    "...scripted recommendations.",
-    "...paid opinions disguised as advice.",
-    "...manufactured trust.",
-    "...pressure instead of proof.",
-    "...algorithms instead of people.",
+    "...likes that never turn into revenue.",
+    "...24 hours of posting for zero sales.",
+    "...buyers leaving before checkout.",
+    "...DMs instead of real orders.",
+    "...people asking “price?” in every comment.",
+    // "...depending on brand deals instead of your own store.",
 ];
 
 const INTERVAL = 2500;
-// const SLOT_HEIGHT = 84;
 const VISIBLE_COUNT = 5;
 
 function getOpacity(distance: number): number {
@@ -39,8 +39,6 @@ export default function ProblemSection() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [skipTransition, setSkipTransition] = useState(false);
     const stripRef = useRef<HTMLDivElement>(null);
-
-
 
     const advance = useCallback(() => {
         setActiveIndex((prev) => prev + 1);
@@ -74,9 +72,8 @@ export default function ProblemSection() {
     // Offset so activeIndex=0 starts centered in the middle copy
     const baseOffset = items.length;
     const centerOffset = Math.floor(VISIBLE_COUNT / 2);
-    const SLOT_HEIGHT = isMobile ? 64 : 84;
+    const SLOT_HEIGHT = isMobile ? 66 : 86;
     const translateY = -(activeIndex + baseOffset - centerOffset) * SLOT_HEIGHT;
-
 
     return (
         <section className="px-4 md:px-6">
@@ -87,10 +84,10 @@ export default function ProblemSection() {
 
                 <div className="max-w-220 mx-auto relative z-10">
                     <Badge>Problem</Badge>
-                    <H3 className="text-grad mt-4 lg:mt-8">Shopping online should feel transparent.</H3>
+                    <H3 className="text-grad mt-4 lg:mt-8">Selling online should feel direct.</H3>
                     <div className="flex flex-col md:flex-row items-center mt-2">
                         <div className="w-full md:w-[55%] mt-4 md:mt-0">
-                            <H5 className="">But online shopping gives you - </H5>
+                            <H5 className="">But most platforms give you -</H5>
                         </div>
                         {/* Wheel */}
                         <div className="w-full md:w-[45%] mt-4 md:mt-0">

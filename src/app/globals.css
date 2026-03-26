@@ -96,16 +96,82 @@
 
 /* headings */
 .text-grad {
-  background: linear-gradient(192deg, #0c0c0c 52.51%, #6f6f6f 106.61%);
+  background: linear-gradient(191.51deg, #0c0c0c 52.51%, #6f6f6f 106.61%);
   -webkit-background-clip: text;
   background-clip: "text";
   -webkit-text-fill-color: transparent;
 }
 
 .badge-shadow {
-  background: linear-gradient(180deg, #0C0C0C 11.41%, #4B4B4A 100%);
+  background: linear-gradient(180deg, #0c0c0c 11.41%, #4b4b4a 100%);
   box-shadow:
     0 -1px 7px -4px rgba(181, 254, 40, 0.86) inset,
     0 4px 9px -3px #292825,
     0 13px 19px -12px rgba(181, 254, 40, 0.5);
+}
+
+.wheel-active {
+  /* background: linear-gradient(180deg, #C4B50F 0%, #AF123A 100%); */
+  background: linear-gradient(105.14deg, #ab7c03 20.88%, #b9300b 40.12%);
+  -webkit-background-clip: text;
+  background-clip: "text";
+  -webkit-text-fill-color: transparent;
+}
+
+/* Decoration icon floating animations */
+@keyframes float-up-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-sway {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(4px, -8px) rotate(2deg);
+  }
+  66% {
+    transform: translate(-3px, -5px) rotate(-1.5deg);
+  }
+}
+
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+}
+
+.deco-float-1 {
+  animation: float-up-down 4s ease-in-out infinite;
+}
+
+.deco-float-2 {
+  animation: float-sway 5s ease-in-out infinite;
+}
+
+.deco-float-3 {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.deco-float-4 {
+  animation: float-up-down 5.5s ease-in-out infinite 1s;
+}
+
+.deco-float-5 {
+  animation: float-sway 4.5s ease-in-out infinite 0.5s;
+}
+
+.deco-float-6 {
+  animation: float-gentle 5s ease-in-out infinite 1.5s;
 }

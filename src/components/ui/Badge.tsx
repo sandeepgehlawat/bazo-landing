@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from "react";
 
-type BadgeVariant = "dark" | "accent" | "light" | "glow";
+type BadgeVariant = "default" | "accent" | "light" | "glow";
 type BadgeSize = "sm" | "default";
 
 type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
@@ -9,10 +9,10 @@ type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
   children: ReactNode;
 };
 
-const defaultStyle = "inline-flex items-center justify-center rounded-full";
+const defaultStyle = "w-fit flex items-center justify-center rounded-full";
 
 const variantStyles: Record<BadgeVariant, string> = {
-  dark: "bg-dark text-white border border-dark badge-shadow",
+  default: "bg-dark text-white border border-dark badge-shadow mx-auto",
   accent: "bg-accent text-primary font-heading font-semibold",
   light: "bg-white text-primary border border-gray-100 shadow-sm font-heading font-medium",
   glow: "border border-dark text-white",
@@ -30,7 +30,7 @@ const glowStyle = {
 };
 
 export default function Badge({
-  variant = "dark",
+  variant = "default",
   size = "default",
   children,
   className = "",
@@ -38,12 +38,12 @@ export default function Badge({
   ...props
 }: BadgeProps) {
   return (
-    <span
+    <div
       className={`${defaultStyle} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
       style={variant === "glow" ? { ...glowStyle, ...style } : style}
       {...props}
     >
       {children}
-    </span>
+    </div>
   );
 }
