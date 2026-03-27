@@ -6,8 +6,10 @@ import Button from "../ui/Button";
 import BazoLogo from "./BazoLogo";
 import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+    const pathname = usePathname()
     const [hidden, setHidden] = useState(false);
     const { scrollY } = useScroll();
     const lastScrollY = useRef(0);
@@ -22,10 +24,9 @@ export default function Navbar() {
         }
         lastScrollY.current = latest;
     });
-
     return (
         <motion.div
-            className="fixed top-6 md:top-8 z-50 w-full flex items-center justify-center px-6"
+            className={`fixed top-6 md:top-8 z-50 w-full flex items-center justify-center px-6 ${pathname === '/become-host' && 'hidden'}`}
             animate={{ y: hidden ? "-150%" : "0%" }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         >

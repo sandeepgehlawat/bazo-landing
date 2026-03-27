@@ -49,7 +49,7 @@ export default function HeroSection() {
                     >
                         <Sh1 className="mt-2 text-center">Start a live stream, show the product, and viewers can buy instantly while watching.</Sh1>
                     </motion.div>
-                    <Button className="border mt-6">Start Selling live</Button>
+                    <Link href="/become-host"><Button className="border mt-6">Start Selling live</Button></Link>
                 </div>
 
                 {/* Hero Illustration */}

@@ -75,7 +75,7 @@ function StepCard({
             }}
             className="bg-background rounded-[20px] overflow-hidden p-3 flex flex-col md:flex-row gap-4"
         >
-            <div className="w-fit">
+            <div className="w-fit mx-auto">
                 <Image
                     src={item.image}
                     alt={`work-${index}`}

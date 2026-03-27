@@ -181,7 +181,7 @@ export const MobileLayout = () => {
                                                 <Sh0>{item.title}</Sh0>
                                                 <P className="font-medium">{item.description}</P>
                                                 <div
-                                                    className="mt-3 w-fit h-60 md:h-80 lg:h-100 flex items-end justify-center border-[1.5px] rounded-4xl overflow-hidden"
+                                                    className="mt-3 h-82 w-full flex items-end justify-center border-[1.5px] rounded-4xl overflow-hidden"
                                                     style={{
                                                         backgroundColor: item.background,
                                                         borderColor: item.border
@@ -192,7 +192,7 @@ export const MobileLayout = () => {
                                                         alt={item.title}
                                                         height={400}
                                                         width={408}
-                                                        className={`${i === 2 && ' py-4 h-100'}`}
+                                                        className={`${i===2 ? 'h-82 py-4' : ''}`}
                                                     />
                                                 </div>
                                             </div>

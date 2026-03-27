@@ -19,7 +19,7 @@ export function H1({ children, className = "", style }: TypographyProps) {
 
 export function H2({ children, className = "", style }: TypographyProps) {
   return (
-    <h2 className={`font-heading font-black text-[42px] leading-12 md:text-[60px] md:leading-16.5 ${className}`} style={style}>
+    <h2 className={`font-heading font-black text-[42px] leading-12 md:text-[60px] md:leading-16.5 text-primary ${className}`} style={style}>
       {children}
     </h2>
   );
@@ -127,7 +127,6 @@ export function PXs({ children, className = "", style }: TypographyProps) {
 // -----------------------------------------------------------
 // Captions — Roboto
 // -----------------------------------------------------------
-
 export function LinkText({ children, className = "", style }: TypographyProps) {
   return (
     <span className={`font-body font-semibold text-[16px] leading-4.5 ${className}`} style={style}>

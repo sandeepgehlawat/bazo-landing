@@ -7,12 +7,25 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { hostSolutionItems } from "@/utils/constants";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 
 // Extra scroll height per item (in vh units)
 const SCROLL_PER_ITEM = 60;
 
 export default function SolutionSection() {
+    const isMobile = useIsMobile()
+    return (
+        <>
+            {
+                isMobile ? <MobileLayout /> : <DesktopLayout />
+            }
+        </>
+    )
+}
+
+
+export const DesktopLayout = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const active = hostSolutionItems[activeIndex];
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -33,7 +46,6 @@ export default function SolutionSection() {
 
     // Total height = viewport + extra scroll for each item transition
     const totalScrollHeight = `${100 + hostSolutionItems.length * SCROLL_PER_ITEM}vh`;
-
     return (
         <section
             ref={sectionRef}
@@ -45,13 +57,13 @@ export default function SolutionSection() {
                 <div className="w-full max-w-325 mx-auto rounded-3xl md:rounded-[36px] py-10 2xl:py-20.5 md:px-6 relative overflow-hidden">
                     <div className="max-w-220 mx-auto">
                         <div className="space-y-4">
-                            <Badge>Solution</Badge>
+                            <div className="w-fit mx-auto"><Badge>Solution</Badge></div>
                             <H3 className="text-center w-full md:w-142.25 mx-auto">Turn Your Audience Into Customers. Live.</H3>
                             <Sh1 className="text-center">Real products. Real creators. In real time.</Sh1>
                         </div>
 
                         {/* Two columns */}
-                        <div className="mt-8 2xl:mt-14 flex flex-col lg:flex-row justify-between gap-6 lg:gap-8">
+                        <div className="sticky-2 mt-8 2xl:mt-14 flex flex-col lg:flex-row justify-between gap-6 lg:gap-8">
                             {/* Left - Accordion list */}
                             <div className="lg:w-[50%]">
                                 {hostSolutionItems.map((item, i) => {
@@ -122,13 +134,14 @@ export default function SolutionSection() {
                                             backgroundColor: active.background,
                                             borderColor: active.border,
                                         }}
-                                        className="w-fit h-92 2xl:h-100 flex items-end justify-center border-[1.5px] rounded-4xl overflow-hidden"
+                                        className="w-fit h-60 md:h-80 lg:h-100 flex items-end justify-center border-[1.5px] rounded-4xl overflow-hidden"
                                     >
                                         <Image
                                             src={active.image}
                                             alt={active.title}
                                             height={400}
                                             width={408}
+                                            className={`${activeIndex === 2 && ' py-4 h-100'}`}
                                         />
                                     </motion.div>
                                 </AnimatePresence>
@@ -143,5 +156,65 @@ export default function SolutionSection() {
                 </div>
             </div>
         </section>
-    );
+    )
+}
+
+
+export const MobileLayout = () => {
+    return (
+        <section className="relative px-4 md:px-6" >
+            {/* Sticky inner content — stays pinned while user scrolls through the tall wrapper */}
+            <div className="sticky top-0 min-h-screen flex items-center">
+                <div className="w-full max-w-325 mx-auto rounded-3xl md:rounded-[36px] py-10 2xl:py-20.5 md:px-6 relative overflow-hidden">
+                    <div className="max-w-220 mx-auto">
+                        <div className="space-y-2 lg:space-y-4">
+                            <div className="w-fit mx-auto"><Badge>Solution</Badge></div>
+                            <H3 className="text-center w-full md:w-142.25 mx-auto">Turn Your Audience Into Customers. Live.</H3>
+                            <Sh1 className="text-center">Real products. Real creators. In real time.</Sh1>
+                        </div>
+                        <div className="mt-8 2xl:mt-14 flex flex-col lg:flex-row justify-between gap-6 lg:gap-8">
+                            <div className="lg:w-[50%]">
+                                {hostSolutionItems.map((item, i) => {
+                                    return (
+                                        <div key={i}>
+
+                                            <div className="rounded-2xl p-3 space-y-2">
+                                                <Image src={item.icon} alt="" height={32} width={32} className="shrink-0 h-8 w-8" />
+                                                <Sh0>{item.title}</Sh0>
+                                                <P className="font-medium">{item.description}</P>
+                                                <div
+                                                    className="mt-3 w-full flex items-end justify-center border-[1.5px] rounded-4xl overflow-hidden"
+                                                    style={{
+                                                        backgroundColor: item.background,
+                                                        borderColor: item.border
+                                                    }}
+                                                >
+                                                    <Image
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        height={200}
+                                                        width={208}
+                                                        className="w-full"
+                                                    />
+                                                </div>
+                                            </div>
+                                            {
+                                                i !== hostSolutionItems.length - 1 &&
+                                                <div className="border-t border-dashed border-[#d9dbd5]" />
+                                            }
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Get App Button */}
+                    <div className="hidden md:block absolute bottom-4 right-4">
+                        <GetAppButton />
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
 }

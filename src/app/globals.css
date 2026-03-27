@@ -10,7 +10,11 @@
   --color-bg-light: #f9f9f9;
   --color-text-body: #30302f;
   --color-text-muted: #666666;
+  --color-text-subtlest: #5b5c59;
   --color-border: #eaeaea;
+  --color-border-subtlest: #d9dbd5;
+  --color-border-disabled: #747572;
+  --color-secondary: #668d1b;
 
   /* Font families */
   --font-heading: "Hanken Grotesk", sans-serif;
@@ -174,4 +178,30 @@
 
 .deco-float-6 {
   animation: float-gentle 5s ease-in-out infinite 1.5s;
+}
+
+/* Input Shadow */
+.input-shadow {
+  box-shadow: 0px 3px 5px -3px #0000002e;
+}
+.btn-outline-shadow {
+  box-shadow: 0px 3px 5px -3px #0000002e;
+}
+
+/* Scrollbar */
+.cus-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cus-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cus-scrollbar::-webkit-scrollbar-thumb {
+  background: #F2F2F2;
+  border-radius: 6px;
+}
+
+.cus-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #D9DBD5;
 }

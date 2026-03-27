@@ -21,7 +21,7 @@ export default function FAQSection({ type }: { type?: View }) {
                     </div>
 
                     {/* FAQ  */}
-                    <div className="mt-14 max-w-105 mx-auto">
+                    <div className="mt-8 lg:mt-14 max-w-105 mx-auto">
                         <Accordion items={type === "user" ? userFaqs : hostFaqs} />
                     </div>
                 </div>

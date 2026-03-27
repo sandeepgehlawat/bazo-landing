@@ -1,7 +1,7 @@
-export default function BazoLogo({ dark = false }: { size?: number; dark?: boolean }) {
+export default function BazoLogo({ dark = false, className }: { dark?: boolean, className?:string }) {
     return (
         <div className="flex items-center gap-1 md:gap-2">
-            <svg viewBox="0 0 48 48" fill="none" className="aspect-square h-8 md:h-12 w-8 md:w-12">
+            <svg viewBox="0 0 48 48" fill="none" className={`aspect-square h-8 md:h-12 w-8 md:w-12 ${className}`}>
                 {/* Background */}
                 <path d="M0 14.6787C0 9.65086 0 7.13694 0.947357 5.20315C1.85441 3.35161 3.35161 1.85441 5.20315 0.947357C7.13694 0 9.65086 0 14.6787 0H33.3213C38.3491 0 40.8631 0 42.7969 0.947357C44.6484 1.85441 46.1456 3.35161 47.0526 5.20315C48 7.13694 48 9.65086 48 14.6787V33.3213C48 38.3491 48 40.8631 47.0526 42.7969C46.1456 44.6484 44.6484 46.1456 42.7969 47.0526C40.8631 48 38.3491 48 33.3213 48H14.6787C9.65086 48 7.13694 48 5.20315 47.0526C3.35161 46.1456 1.85441 44.6484 0.947357 42.7969C0 40.8631 0 38.3491 0 33.3213V14.6787Z" fill="#B5FE28" />
                 {/* Logo Mark - centered */}
