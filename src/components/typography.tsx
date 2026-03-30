@@ -129,7 +129,7 @@ export function PXs({ children, className = "", style }: TypographyProps) {
 // -----------------------------------------------------------
 export function LinkText({ children, className = "", style }: TypographyProps) {
   return (
-    <span className={`font-body font-semibold text-[16px] leading-4.5 ${className}`} style={style}>
+    <span className={`font-body font-medium text-[14px] leading-3.5 md:text-[16px] md:leading-4.5 ${className}`} style={style}>
       {children}
     </span>
   );

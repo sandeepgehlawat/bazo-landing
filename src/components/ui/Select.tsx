@@ -107,7 +107,7 @@ export default function Select({
               (
                 selectedLabels.map((label, i) => {
                   return (
-                    <PSm key={i} className="border rounded-full p-2.5 py-2 md:leading-3">{label}</PSm>
+                    <PSm key={i} className="border rounded-full p-2.5 py-0.5 md:py-1.5 md:leading-3">{label}</PSm>
                   )
                 })
               )

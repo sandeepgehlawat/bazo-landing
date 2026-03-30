@@ -26,13 +26,13 @@ export default function Navbar() {
     });
     return (
         <motion.div
-            className={`fixed top-6 md:top-8 z-50 w-full flex items-center justify-center px-6 ${pathname === '/become-host' && 'hidden'}`}
+            className={`fixed top-6 md:top-8 z-50 w-full flex items-center justify-center px-6 ${(pathname === '/become-host' || pathname === '/become-host/apply' || pathname.startsWith('/admin')) && 'hidden'}`}
             animate={{ y: hidden ? "-150%" : "0%" }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         >
             <nav className="w-full max-w-199 mx-auto bg-dark rounded-xl md:rounded-2xl p-2.5 flex items-center justify-between" style={{ boxShadow: '0 0 9px 0 rgba(0, 0, 0, 0.10), 0 0 28px -18px rgba(0, 0, 0, 0.24), 0 3px 10px -2px rgba(0, 0, 0, 0.25), 0 3px 5px -3px rgba(0, 0, 0, 0.18)' }}>
                 <Link href="/">
-                    <BazoLogo size={48} />
+                    <BazoLogo />
                 </Link>
                 <div className="flex items-center gap-1 md:gap-4">
                     <Link href="/host"><Button variant="secondary" className="hidden sm:block"><ButtonText>Become Host</ButtonText></Button></Link>

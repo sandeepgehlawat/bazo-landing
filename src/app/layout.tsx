@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar";
+import Providers from "@/components/providers/Providers";
 
 export const metadata: Metadata = {
   title: "Bazo - Buy Live. From Creators.",
   description: "The New Way India Shops. Buy directly from the creators you trust. Live. Real. Limited editions.",
 };
+
 
 export default function RootLayout({
   children,
@@ -20,10 +22,12 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased">
-        <main>
+        <Providers>
           <Navbar />
-          {children}
-        </main>
+          <main>
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );

@@ -5,28 +5,18 @@ import BazoLogo from "@/components/common/BazoLogo";
 import { ButtonText, LinkText, P, PSm, PXs, Sh0, Sh2 } from "@/components/typography";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import Switch from "@/components/ui/Switch";
 import { ArrowLeft01Icon, CancelCircleIcon, CheckmarkCircle03Icon, DiscordIcon, Facebook01Icon, FirstBracketCircleIcon, InstagramIcon, Linkedin01Icon, NewTwitterRectangleIcon, RedditIcon, SlackIcon, TelegramIcon, TwitchIcon, WhatsappIcon, YoutubeIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Checkbox from "@/components/ui/Checkbox";
 import Link from "next/link";
 import type { IconSvgElement } from "@hugeicons/react";
-import { div } from "motion/react-client";
 import Select from "@/components/ui/Select";
+import { detectCommunityPlatform, detectPlatform, Platform } from "@/lib/utils";
+import api from "@/lib/api";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { queryClient } from "@/lib/query-client";
 
-type Platform =
-    | "Facebook"
-    | "Instagram"
-    | "YouTube"
-    | "Twitter"
-    | "LinkedIn"
-    | "Twitch"
-    | "Discord"
-    | "Telegram"
-    | "WhatsApp"
-    | "Reddit"
-    | "Slack"
-    | "Other";
 const icons: Record<Platform, IconSvgElement> = {
     "Facebook": Facebook01Icon,
     "Instagram": InstagramIcon,
@@ -42,89 +32,106 @@ const icons: Record<Platform, IconSvgElement> = {
     "Other": SlackIcon,
 }
 
-function detectPlatform(url: string): Platform {
-    const hosts: Record<string, Platform> = {
-        "youtube.com": "YouTube",
-        "youtu.be": "YouTube",
-        "instagram.com": "Instagram",
-        "twitter.com": "Twitter",
-        "x.com": "Twitter",
-        "facebook.com": "Facebook",
-        "linkedin.com": "LinkedIn",
-        "twitch.tv": "Twitch",
-    };
-    try {
-        const hostname = new URL(url).hostname.replace("www.", "");
-        return hosts[hostname] || "Other";
-    } catch {
-        return "Other";
-    }
-}
-
-function detectCommunityPlatform(url: string): Platform {
-    const hosts: Record<string, Platform> = {
-        "facebook.com": "Facebook",
-        "discord.gg": "Discord",
-        "discord.com": "Discord",
-        "t.me": "Telegram",
-        "telegram.me": "Telegram",
-        "reddit.com": "Reddit",
-        "whatsapp.com": "WhatsApp",
-        "chat.whatsapp.com": "WhatsApp",
-        "slack.com": "Slack",
-    };
-    try {
-        const hostname = new URL(url).hostname.replace("www.", "");
-        return hosts[hostname] || "Other";
-    } catch {
-        return "Other";
-    }
-}
-
 export default function ApplicationForm() {
+    const router = useRouter()
     const [step, setStep] = useState(1)
+
+    // Step 1 — Personal
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+
+    // Step 2 — Details
     const [isContentCreator, setIsContentCreator] = useState(false);
     const [isCommunityGroup, setIsCommunityGroup] = useState(false);
-    const [isShop, setIsShop] = useState(false);
-    const [isBrand, setIsBrand] = useState(false);
+    const [hasShop, setHasShop] = useState(false);
+    const [isBrandOwner, setIsBrandOwner] = useState(false);
+
     const [socialLinks, setSocialLinks] = useState<string[]>([""]);
     const [communityLinks, setCommunityLinks] = useState<string[]>([""]);
+
+    // Shop fields
+    const [storeType, setStoreType] = useState<string[]>([]);
+    const [shopAddress, setShopAddress] = useState('')
+    const [postalCode, setPostalCode] = useState('')
+    const [state, setState] = useState('')
+    const [gstNumber, setGstNumber] = useState('')
+
+    // Brand fields
+    const [brandName, setBrandName] = useState('')
+    const [productOrigin, setProductOrigin] = useState('')
+    const [productWebsite, setProductWebsite] = useState('')
+
+    // Step 3 — What will you sell
+    const [productCategories, setProductCategories] = useState<string[]>([]);
+    const [about, setAbout] = useState('')
+
+    // Step 4 — Agreement
     const [agreement, setAgrement] = useState({
         terms1: false,
         terms2: false,
         terms3: false,
     })
 
-    const [selected, setSelected] = useState<string[]>([]);
-    const [storeType, setStoreType] = useState<string[]>([]);
+    // Submit mutation
+    const { mutate: submitApplication, isPending: isSubmitting } = useMutation({
+        mutationFn: async () => {
+            const res = await api.post('/api/v1/seller/apply', {
+                first_name: firstName,
+                last_name: lastName || undefined,
+                email,
+                is_content_creator: isContentCreator,
+                social_links: isContentCreator ? socialLinks.filter(Boolean) : undefined,
+                has_community: isCommunityGroup,
+                community_links: isCommunityGroup ? communityLinks.filter(Boolean) : undefined,
+                has_shop: hasShop,
+                store_types: hasShop ? storeType : undefined,
+                shop_address: hasShop ? shopAddress : undefined,
+                postal_code: hasShop ? postalCode : undefined,
+                state: hasShop ? state : undefined,
+                gst_number: hasShop && gstNumber ? gstNumber : undefined,
+                is_brand_owner: isBrandOwner,
+                brand_name: isBrandOwner ? brandName : undefined,
+                product_origin: isBrandOwner ? productOrigin : undefined,
+                product_website: isBrandOwner && productWebsite ? productWebsite : undefined,
+                product_categories: productCategories,
+                about,
+            })
+            return res.data
+        },
+        onSuccess: () => {
+            setStep(5)
+            setTimeout(() => {
+                queryClient.invalidateQueries({ queryKey: ['get-application-status'] })
+            }, 3000)
+        },
+    })
 
+    // Social links helpers
     const updateLink = (index: number, value: string) => {
         const updated = [...socialLinks];
         updated[index] = value;
         setSocialLinks(updated);
     };
+    const addLink = () => setSocialLinks([...socialLinks, ""]);
+    const removeLink = (index: number) => setSocialLinks(socialLinks.filter((_, i) => i !== index));
 
-    const addLink = () => {
-        setSocialLinks([...socialLinks, ""]);
-    };
-
-    const removeLink = (index: number) => {
-        setSocialLinks(socialLinks.filter((_, i) => i !== index));
-    };
-
+    // Community links helpers
     const updateCommunityLink = (index: number, value: string) => {
         const updated = [...communityLinks];
         updated[index] = value;
         setCommunityLinks(updated);
     };
+    const addCommunityLink = () => setCommunityLinks([...communityLinks, ""]);
+    const removeCommunityLink = (index: number) => setCommunityLinks(communityLinks.filter((_, i) => i !== index));
 
-    const addCommunityLink = () => {
-        setCommunityLinks([...communityLinks, ""]);
-    };
-
-    const removeCommunityLink = (index: number) => {
-        setCommunityLinks(communityLinks.filter((_, i) => i !== index));
-    };
+    const handleNext = () => {
+        if (step === 4) {
+            submitApplication()
+        } else {
+            setStep((prev) => prev + 1)
+        }
+    }
 
     return (
         <div className="space-y-6 max-w-98.5">
@@ -173,12 +180,16 @@ export default function ApplicationForm() {
                                             inputSize="sm"
                                             label="First Name *"
                                             placeholder="First name"
+                                            value={firstName}
+                                            onChange={(e) => setFirstName(e.target.value)}
                                         />
                                         <Input
                                             variant="outline"
                                             inputSize="sm"
                                             label="Last Name"
                                             placeholder="Last name"
+                                            value={lastName}
+                                            onChange={(e) => setLastName(e.target.value)}
                                         />
                                     </div>
 
@@ -187,6 +198,8 @@ export default function ApplicationForm() {
                                         inputSize="sm"
                                         label="Email Address *"
                                         placeholder="Enter email address"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
                             </>
@@ -280,11 +293,11 @@ export default function ApplicationForm() {
 
                                     {/* Shop */}
                                     <div className="flex items-center gap-4 py-3">
-                                        <Checkbox checkboxSize="lg" checked={isShop} onCheckedChange={(checked) => setIsShop(checked)} />
+                                        <Checkbox checkboxSize="lg" checked={hasShop} onCheckedChange={(checked) => setHasShop(checked)} />
                                         <P className="font-medium text-dark">Do You have a Shop? *</P>
                                     </div>
                                     {
-                                        isShop &&
+                                        hasShop &&
                                         <div className="space-y-2">
                                             <Select
                                                 variant="outline"
@@ -301,26 +314,76 @@ export default function ApplicationForm() {
                                                 value={storeType}
                                                 onChange={setStoreType}
                                             />
-                                            <Input inputSize="sm" variant="outline" label="Shop Address *" placeholder="shop address" />
+                                            <Input
+                                                inputSize="sm"
+                                                variant="outline"
+                                                label="Shop Address *"
+                                                placeholder="shop address"
+                                                value={shopAddress}
+                                                onChange={(e) => setShopAddress(e.target.value)}
+                                            />
                                             <div className="grid grid-cols-2 gap-4">
-                                                <Input inputSize="sm" variant="outline" label="Postal code *" placeholder="123456" inputMode="decimal" />
-                                                <Input inputSize="sm" variant="outline" label="State*" placeholder="select" />
+                                                <Input
+                                                    inputSize="sm"
+                                                    variant="outline"
+                                                    label="Postal code *"
+                                                    placeholder="123456"
+                                                    inputMode="decimal"
+                                                    value={postalCode}
+                                                    onChange={(e) => setPostalCode(e.target.value)}
+                                                />
+                                                <Input
+                                                    inputSize="sm"
+                                                    variant="outline"
+                                                    label="State*"
+                                                    placeholder="select"
+                                                    value={state}
+                                                    onChange={(e) => setState(e.target.value)}
+                                                />
                                             </div>
-                                            <Input inputSize="sm" variant="outline" label="GSTIN number" placeholder="Enter you GSTIN number here" />
+                                            <Input
+                                                inputSize="sm"
+                                                variant="outline"
+                                                label="GSTIN number"
+                                                placeholder="Enter you GSTIN number here"
+                                                value={gstNumber}
+                                                onChange={(e) => setGstNumber(e.target.value)}
+                                            />
                                         </div>
                                     }
 
                                     {/* Brand */}
                                     <div className="flex gap-4 py-3">
-                                        <Checkbox checkboxSize="lg" checked={isBrand} onCheckedChange={(checked) => setIsBrand(checked)} />
+                                        <Checkbox checkboxSize="lg" checked={isBrandOwner} onCheckedChange={(checked) => setIsBrandOwner(checked)} />
                                         <P className="font-medium text-dark">Are you a product owner or brand owner? *</P>
                                     </div>
                                     {
-                                        isBrand &&
+                                        isBrandOwner &&
                                         <div className="space-y-2">
-                                            <Input inputSize="sm" variant="outline" label="Brand name *" placeholder="Brand name" />
-                                            <Input inputSize="sm" variant="outline" label="Where are your products made? *" placeholder="Describe your product" />
-                                            <Input inputSize="sm" variant="outline" label="Product Website" placeholder="website" />
+                                            <Input
+                                                inputSize="sm"
+                                                variant="outline"
+                                                label="Brand name *"
+                                                placeholder="Brand name"
+                                                value={brandName}
+                                                onChange={(e) => setBrandName(e.target.value)}
+                                            />
+                                            <Input
+                                                inputSize="sm"
+                                                variant="outline"
+                                                label="Where are your products made? *"
+                                                placeholder="Describe your product"
+                                                value={productOrigin}
+                                                onChange={(e) => setProductOrigin(e.target.value)}
+                                            />
+                                            <Input
+                                                inputSize="sm"
+                                                variant="outline"
+                                                label="Product Website"
+                                                placeholder="website"
+                                                value={productWebsite}
+                                                onChange={(e) => setProductWebsite(e.target.value)}
+                                            />
                                         </div>
                                     }
                                 </div>
@@ -345,8 +408,8 @@ export default function ApplicationForm() {
                                                 { label: "Electronics", value: "electronics" },
                                                 { label: "Other", value: "other" },
                                             ]}
-                                            value={selected}
-                                            onChange={setSelected}
+                                            value={productCategories}
+                                            onChange={setProductCategories}
                                         />
                                         <PSm className="font-normal italic">Can select max 3 categories</PSm>
                                     </div>
@@ -356,6 +419,8 @@ export default function ApplicationForm() {
                                         inputSize="sm"
                                         label="Tell us about yourself *"
                                         placeholder="Tell us about your shop, brand, or content and what you plan to sell."
+                                        value={about}
+                                        onChange={(e) => setAbout(e.target.value)}
                                     />
                                 </div>
                             </>
@@ -406,9 +471,15 @@ export default function ApplicationForm() {
             }
             {
                 step !== 5 ?
-                    <Button className="border border-primary w-full" onClick={() => setStep((prev) => prev + 1)}>{step === 4 ? 'Submit Application' : 'Next'}</Button>
+                    <Button
+                        className="border border-primary w-full"
+                        onClick={handleNext}
+                        disabled={isSubmitting}
+                    >
+                        {step === 4 ? (isSubmitting ? 'Submitting...' : 'Submit Application') : 'Next'}
+                    </Button>
                     :
-                    <Button className="border border-primary w-full">Back to Home</Button>
+                    <Button className="border border-primary w-full" onClick={() => router.push('/')}>Back to Home</Button>
             }
         </div >
     );
